@@ -281,7 +281,10 @@ class Tokenizer(Transform):
         return res
 
     def setups(self, dsets):
-        if not self.mode == 'df' or not isinstance(dsets.items, pd.DataFrame): return
+        try:
+            if not self.mode == 'df' or not isinstance(dsets.items, pd.DataFrame): return
+        except AttributeError:
+            return
         dsets.items,count = tokenize_df(dsets.items, self.text_cols, rules=self.rules, **self.kwargs)
         if self.counter is None: self.counter = count
         return dsets
