@@ -280,9 +280,9 @@ class Tokenizer(Transform):
         res.path,res.output_dir = path,output_dir
         return res
 
-    def setups(self, items):
-        if not self.mode == 'df' or not isinstance(items, pd.DataFrame): return
-        items,count = tokenize_df(items, self.text_cols, rules=self.rules, **self.kwargs)
+    def setups(self, dsets):
+        if not self.mode == 'df' or not isinstance(dsets.items, pd.DataFrame): return
+        dsets.items,count = tokenize_df(dsets.items, self.text_cols, rules=self.rules, **self.kwargs)
         if self.counter is None: self.counter = count
         return items
 
